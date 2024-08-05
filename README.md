@@ -19,6 +19,9 @@ EntraMail is a PowerShell tool designed to identify valid users in Azure Active 
 ### Command Line Usage
 
 ```powershell
+# Load The Script
+Import-Module .\EntraMail.psm1
+
 # To check a single set of names
 Invoke-EntraMail -PrivateName "Shaked" -LastName "Wiessman" -DomainName "example.com" -OutputFilePath "results.html"
 
