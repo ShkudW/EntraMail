@@ -22,7 +22,6 @@ function Invoke-EntraMail {
         [switch]$StopOnFirstMatch
     )
 
-    
     Write-Host " _____       _             __  __       _ _ " -ForegroundColor DarkCyan
     Write-Host "| ____|_ __ | |_ _ __ __ _|  \/  | __ _(_) |" -ForegroundColor DarkCyan
     Write-Host "|  _| | '_ \| __| '__/ _` | |\/| |/ _` | | |" -ForegroundColor DarkCyan
@@ -62,46 +61,6 @@ function Invoke-EntraMail {
         )
     }
 
-    
-    $url = "https://login.microsoftonline.com/common/GetCredentialType"
-
-    
-    if ($PrivateName) {
-        if (-not ($LastName -and $DomainName)) {
-            Write-Host "When using -PrivateName, you must also provide -LastName and -DomainName." -ForegroundColor Red
-            return
-        }
-        if ($FilePath -or $NamesFilePath) {
-            Write-Host "You cannot use -FilePath or -NamesFilePath when using -PrivateName." -ForegroundColor Red
-            return
-        }
-    }
-    elseif ($FilePath) {
-        if ($PrivateName -or $LastName -or $NamesFilePath) {
-            Write-Host "You cannot use -PrivateName, -LastName, or -NamesFilePath when using -FilePath." -ForegroundColor Red
-            return
-        }
-        if (-not $DomainName) {
-            Write-Host "When using -FilePath, you must also provide -DomainName." -ForegroundColor Red
-            return
-        }
-    }
-    elseif ($NamesFilePath) {
-        if ($PrivateName -or $LastName -or $FilePath) {
-            Write-Host "You cannot use -PrivateName, -LastName, or -FilePath when using -NamesFilePath." -ForegroundColor Red
-            return
-        }
-        if (-not $DomainName) {
-            Write-Host "When using -NamesFilePath, you must also provide -DomainName." -ForegroundColor Red
-            return
-        }
-    }
-    else {
-        Write-Host "Please provide either -PrivateName with -LastName, -FilePath, or -NamesFilePath." -ForegroundColor Yellow
-        return
-    }
-
-    
     $UserNames = @()
     $validUsers = @()
     $firstValidUser = $null
@@ -121,67 +80,72 @@ function Invoke-EntraMail {
                 $FirstName = $split[0]
                 $LastName = $split[1]
                 $UserNameCombos = Get-UsernameCombinations -FirstName $FirstName -LastName $LastName
-                
                 $foundValidUser = $false
                 foreach ($UserName in $UserNameCombos) {
-                    # Create the request body for each user
-                    $body = @{
-                        Username = "$UserName@$DomainName"
-                    } | ConvertTo-Json
+                    $fullUserName = "${UserName}@${DomainName}"
 
-                    
-                    $response = Invoke-RestMethod -Uri $url -Method Post -Body $body -ContentType "application/json"
-
-                    # Check if the user exists based on IfExistsResult
-                    if ($response.IfExistsResult -eq 0) {
-                        Write-Host "The user $UserName@$DomainName exists in Azure AD." -ForegroundColor Green
-                        $validUsers += "$UserName@$DomainName"
-
-                        # Set the first valid user and response for later checks
-                        if (-not $firstValidUser) {
-                            $firstValidUser = "$UserName@$DomainName"
-                            $firstValidResponse = $response
-                        }
-
-                        
-                        $foundValidUser = $true
-
-                        
-                        if ($StopOnFirstMatch) {
-                            break
-                        }
-                    } else {
-                        Write-Host "The user $UserName@$DomainName does not exist in Azure AD." -ForegroundColor Red
-                    }
-
-                    
-                    Start-Sleep -Seconds 7
-
-                    
-                    if ($firstValidUser) {
-                        $checkBody = @{
-                            Username = $firstValidUser
+                    try {
+                        $getCredentialTypeUrl = "https://login.microsoftonline.com/common/GetCredentialType"
+                        $body = @{
+                            Username = $fullUserName
                         } | ConvertTo-Json
 
-                        $checkResponse = Invoke-RestMethod -Uri $url -Method Post -Body $checkBody -ContentType "application/json"
+                        $response = Invoke-RestMethod -Uri $getCredentialTypeUrl -Method Post -Body $body -ContentType "application/json"
 
-                        if ($checkResponse.IfExistsResult -ne $firstValidResponse.IfExistsResult) {
-                            Write-Host "Potential IP block detected. Please change your IP address." -ForegroundColor Yellow
-                            return
+                        if ($response.IfExistsResult -eq 0) {
+                            Write-Host "The user ${fullUserName} exists in Azure AD." -ForegroundColor Green
+                            $validUsers += $fullUserName
+                            $foundValidUser = $true
+
+                            if (-not $firstValidUser) {
+                                $firstValidUser = $fullUserName
+                                $firstValidResponse = $response
+                            }
+
+                            if ($StopOnFirstMatch) {
+                                break
+                            }
+                        } else {
+                            Write-Host "The user ${fullUserName} does not exist in Azure AD." -ForegroundColor Red
+                        }
+
+                        Start-Sleep -Seconds 7
+
+                        if ($firstValidUser) {
+                            $checkBody = @{
+                                Username = $firstValidUser
+                            } | ConvertTo-Json
+
+                            $checkResponse = Invoke-RestMethod -Uri $getCredentialTypeUrl -Method Post -Body $checkBody -ContentType "application/json"
+
+                            if ($checkResponse.IfExistsResult -ne $firstValidResponse.IfExistsResult) {
+                                Write-Host "Potential IP block detected. Please change your IP address." -ForegroundColor Yellow
+                                return
+                            }
                         }
                     }
+                    catch {
+                        Write-Host "An error occurred while checking ${fullUserName}: $_" -ForegroundColor Red
+                    }
                 }
+
                 if ($foundValidUser -and $StopOnFirstMatch) {
                     continue
                 }
             }
         }
     }
+    else {
+        Write-Host "Please provide either -PrivateName with -LastName, -FilePath, or -NamesFilePath." -ForegroundColor Yellow
+        return
+    }
 
-    
+    $UserNames = $UserNames | Sort-Object | Get-Unique
+
+    # Sort the valid users alphabetically
     $validUsers = $validUsers | Sort-Object
 
-    
+    # Check if any valid users were found
     if (-not $validUsers) {
         Write-Host "No valid users were found. Please check your inputs." -ForegroundColor Yellow
         return
@@ -262,5 +226,5 @@ function Invoke-EntraMail {
     }
 }
 
-
+# Export the function to make it available
 Export-ModuleMember -Function Invoke-EntraMail
