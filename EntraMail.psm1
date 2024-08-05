@@ -22,7 +22,7 @@ function Invoke-EntraMail {
         [switch]$StopOnFirstMatch
     )
 
-    # Display Cool Banner
+    
     Write-Host " _____       _             __  __       _ _ " -ForegroundColor DarkCyan
     Write-Host "| ____|_ __ | |_ _ __ __ _|  \/  | __ _(_) |" -ForegroundColor DarkCyan
     Write-Host "|  _| | '_ \| __| '__/ _` | |\/| |/ _` | | |" -ForegroundColor DarkCyan
@@ -62,10 +62,10 @@ function Invoke-EntraMail {
         )
     }
 
-    # Construct the URL
+    
     $url = "https://login.microsoftonline.com/common/GetCredentialType"
 
-    # Check for valid parameter combinations
+    
     if ($PrivateName) {
         if (-not ($LastName -and $DomainName)) {
             Write-Host "When using -PrivateName, you must also provide -LastName and -DomainName." -ForegroundColor Red
@@ -101,7 +101,7 @@ function Invoke-EntraMail {
         return
     }
 
-    # Generate usernames based on inputs
+    
     $UserNames = @()
     $validUsers = @()
     $firstValidUser = $null
@@ -129,7 +129,7 @@ function Invoke-EntraMail {
                         Username = "$UserName@$DomainName"
                     } | ConvertTo-Json
 
-                    # Perform the POST request and get the response
+                    
                     $response = Invoke-RestMethod -Uri $url -Method Post -Body $body -ContentType "application/json"
 
                     # Check if the user exists based on IfExistsResult
@@ -143,10 +143,10 @@ function Invoke-EntraMail {
                             $firstValidResponse = $response
                         }
 
-                        # Mark that a valid user was found for this combination
+                        
                         $foundValidUser = $true
 
-                        # Stop further combinations if StopOnFirstMatch is set
+                        
                         if ($StopOnFirstMatch) {
                             break
                         }
@@ -154,10 +154,10 @@ function Invoke-EntraMail {
                         Write-Host "The user $UserName@$DomainName does not exist in Azure AD." -ForegroundColor Red
                     }
 
-                    # Add a delay between requests
+                    
                     Start-Sleep -Seconds 7
 
-                    # Check if the first valid user response changes
+                    
                     if ($firstValidUser) {
                         $checkBody = @{
                             Username = $firstValidUser
@@ -178,10 +178,10 @@ function Invoke-EntraMail {
         }
     }
 
-    # Sort the valid users alphabetically
+    
     $validUsers = $validUsers | Sort-Object
 
-    # Check if any valid users were found
+    
     if (-not $validUsers) {
         Write-Host "No valid users were found. Please check your inputs." -ForegroundColor Yellow
         return
@@ -262,5 +262,5 @@ function Invoke-EntraMail {
     }
 }
 
-# Export the function to make it available
+
 Export-ModuleMember -Function Invoke-EntraMail
