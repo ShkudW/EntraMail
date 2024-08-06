@@ -30,6 +30,10 @@ Invoke-EntraMail -NamesFilePath "names.txt" -DomainName "example.com" -OutputFil
 
 # To check a list of usernames from a file
 Invoke-EntraMail -FilePath "usernames.txt" -DomainName "example.com" -OutputFilePath "results.html"
+
+# Using the '-StopOnFirstMatch' flag, will stop the script running after finding a valid username.
+
+# Using the '-StopOnFirstMatch' flag with the '-NamesFilePath' flag, will continue to the next name+surname in the file, after finding a valid name in the first line of the file text.
 ```
 
 ### Poc:
