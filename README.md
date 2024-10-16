@@ -23,17 +23,19 @@ EntraMail is a PowerShell tool designed to identify valid users in Azure Active 
 Import-Module .\EntraMail.psm1
 
 # To check a single set of names
-Invoke-EntraMail -PrivateName "Shaked" -LastName "Wiessman" -DomainName "example.com" -OutputFilePath "results.html"
+Invoke-EntraMail -FirstName "Shaked" -LastName "Wiessman" -DomainName "example.com" -OutputFilePath "results.html"
 
 # To check multiple names+last-names from a file
-Invoke-EntraMail -NamesFilePath "names.txt" -DomainName "example.com" -OutputFilePath "results.html"
+Invoke-EntraMail -NamesFile "names.txt" -DomainName "example.com" -OutputFilePath "results.html"
 
 # To check a list of usernames from a file
-Invoke-EntraMail -FilePath "usernames.txt" -DomainName "example.com" -OutputFilePath "results.html"
+Invoke-EntraMail -UsernamesFile "usernames.txt" -DomainName "example.com" -OutputFilePath "results.html"
 
 # Using the '-StopOnFirstMatch' flag, will stop the script running after finding a valid username.
 
-# Using the '-StopOnFirstMatch' flag with the '-NamesFilePath' flag, will continue to the next name+surname in the file, after finding a valid name in the first line of the file text.
+# Using the '-StopOnFirstMatch' flag with the '-NamesFile' flag,And with -Firstname + -Lastname flags.
+
+# Using the '-OutputFilePath' flag to create HTML file with all the Valid users that found.
 ```
 
 ### Poc:
