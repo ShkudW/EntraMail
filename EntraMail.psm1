@@ -207,7 +207,7 @@ function Invoke-EntraMail {
     <div class="container">
         <h1>EntraMail</h1>
         <h2>Valid Users in Azure AD</h2>
-        <div class="copyright">© By Shaked Wiessman</div>
+        <div class="copyright">© By SkudW / https://github.com/ShkudW/EntraMail </div>
         <button onclick="downloadTXT()">Download as TXT</button>
         <table>
             <tr><th>Username</th></tr>
