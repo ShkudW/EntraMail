@@ -30,7 +30,7 @@ function Invoke-EntraMail {
     Write-Host "                                            " -ForegroundColor DarkCyan
     Write-Host "                 EntraMail" -ForegroundColor DarkCyan
     Write-Host "      A tool for finding valid users in Azure AD" -ForegroundColor DarkCyan
-    Write-Host "                 By Shaked Wiessman" -ForegroundColor DarkCyan
+    Write-Host "                 By ShkudW" -ForegroundColor DarkCyan
     Write-Host "=============================================================" -ForegroundColor DarkCyan
 
     function Get-UsernameCombinations {
