@@ -24,7 +24,7 @@ function Invoke-EntraMail {
 
     Write-Host " _____       _             __  __       _ _ " -ForegroundColor DarkCyan
     Write-Host "| ____|_ __ | |_ _ __ __ _|  \/  | __ _(_) |" -ForegroundColor DarkCyan
-    Write-Host "|  _| | '_ \| __| '__/ _ |  |\/| |/ _  | | |" -ForegroundColor DarkCyan
+    Write-Host "|  _| | '_ \| __| '__/ _  | |\/| |/ _  | | |" -ForegroundColor DarkCyan
     Write-Host "| |___| | | | |_| | | (_| | |  | | (_| | | |" -ForegroundColor DarkCyan
     Write-Host "|_____|_| |_|\__|_|  \__,_|_|  |_|\__,_|_|_|" -ForegroundColor DarkCyan
     Write-Host "                                            " -ForegroundColor DarkCyan
