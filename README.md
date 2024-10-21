@@ -12,7 +12,6 @@
 ### Prerequisites
 
 - PowerShell 5.0 or higher
-- Internet connection
 
 ### Command Line Usage
 
