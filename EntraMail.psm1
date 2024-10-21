@@ -24,7 +24,7 @@ function Invoke-EntraMail {
 
     Write-Host " _____       _             __  __       _ _ " -ForegroundColor DarkCyan
     Write-Host "| ____|_ __ | |_ _ __ __ _|  \/  | __ _(_) |" -ForegroundColor DarkCyan
-    Write-Host "|  _| | '_ \| __| '__/ _ | |\/| |/ _ | | | |" -ForegroundColor DarkCyan
+    Write-Host "|  _| | '_ \| __| '__/ _ |  |\/| |/ _  | | |" -ForegroundColor DarkCyan
     Write-Host "| |___| | | | |_| | | (_| | |  | | (_| | | |" -ForegroundColor DarkCyan
     Write-Host "|_____|_| |_|\__|_|  \__,_|_|  |_|\__,_|_|_|" -ForegroundColor DarkCyan
     Write-Host "                                            " -ForegroundColor DarkCyan
@@ -193,8 +193,8 @@ function Invoke-EntraMail {
 <body>
     <div class="container">
         <h1>EntraMail</h1>
-        <h2>Valid Users in Azure AD</h2>
-        <div class="copyright">© By Shaked Wiessman</div>
+        <h2>Valid Users in EntraID</h2>
+        <div class="copyright">© By ShkudW</div>
         <button onclick="downloadTXT()">Download as TXT</button>
         <table>
             <tr><th>Username</th></tr>
