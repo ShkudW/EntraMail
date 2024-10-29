@@ -29,7 +29,7 @@ Import-Module .\EntraMail.psm1
 ```
 ```powershell
 # Searching by NUserNames File
-  Invoke-EntraMail -UsernameFile usernames.txt -DomainName example.com -StopOnFirstMatch -OutputFilePath report.html
+  Invoke-EntraMail -UsernameFile usernames.txt -DomainName example.com -OutputFilePath report.html
 ```
 
 ### PoC
