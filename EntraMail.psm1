@@ -57,7 +57,7 @@ function Invoke-EntraMail {
         Write-Host ""
         Write-Host "  Invoke-EntraMail -FirstName john -LastName doe -DomainName example.com" -ForegroundColor Green
         Write-Host "  Invoke-EntraMail -NamesFile names.txt -DomainName example.com -StopOnFirstMatch" -ForegroundColor Green
-        Write-Host "  Invoke-EntraMail -UsernameFile usernames.txt -DomainName example.com -StopOnFirstMatch -OutputFilePath report.html" -ForegroundColor Green
+        Write-Host "  Invoke-EntraMail -UsernameFile usernames.txt -DomainName example.com -OutputFilePath report.html" -ForegroundColor Green
         Write-Host ""
         Write-Host "File Examples:" -ForegroundColor Cyan
         Write-Host ""
