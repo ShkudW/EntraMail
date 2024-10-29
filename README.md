@@ -21,7 +21,7 @@ Import-Module .\EntraMail.psm1
 ```
 ```powershell
 # Searching by single first name and last name
-  Invoke-EntraMail -FirstName john -LastName doe -DomainName example.com
+  Invoke-EntraMail -FirstName Shaked -LastName Wiessman -DomainName example.com
 ```
 ```powershell
 # Searching by Names-File it is recommended to use -StopOnFirstMatch flag
