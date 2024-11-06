@@ -306,14 +306,14 @@ if ($ConvertNameFile -and $style -and -not $DomainName) {
                         $response = Invoke-RestMethod -Uri $getCredentialTypeUrl -Method Post -Body $body -ContentType "application/json"
 
                         if ($response.IfExistsResult -eq 0) {
-                            Write-Host "The user ${fullUserName} exists in Azure AD." -ForegroundColor Green
+                            Write-Host "The user ${fullUserName} exists in Entra ID." -ForegroundColor Green
                             $validUsers += $fullUserName
 
                             if ($StopOnFirstMatch) {
                                 break
                             }
                         } else {
-                            Write-Host "The user ${fullUserName} does not exist in Azure AD." -ForegroundColor Red
+                            Write-Host "The user ${fullUserName} does not exist in Entra ID." -ForegroundColor Red
                         }
                     } catch {
                         Write-Host "An error occurred while checking ${fullUserName}: $_" -ForegroundColor Red
@@ -345,10 +345,10 @@ if ($ConvertNameFile -and $style -and -not $DomainName) {
                 $response = Invoke-RestMethod -Uri $getCredentialTypeUrl -Method Post -Body $body -ContentType "application/json"
 
                 if ($response.IfExistsResult -eq 0) {
-                    Write-Host "The user ${fullUserName} exists in Azure AD." -ForegroundColor Green
+                    Write-Host "The user ${fullUserName} exists in Entra ID." -ForegroundColor Green
                     $validUsers += $fullUserName
                 } else {
-                    Write-Host "The user ${fullUserName} does not exist in Azure AD." -ForegroundColor Red
+                    Write-Host "The user ${fullUserName} does not exist in Entra ID." -ForegroundColor Red
                 }
             } catch {
                 Write-Host "An error occurred while checking ${fullUserName}: $_" -ForegroundColor Red
