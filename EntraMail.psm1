@@ -39,7 +39,7 @@ function Invoke-EntraMail {
         Write-Host "| |___| | | | |_| | | (_| | |  | | (_| | | |" -ForegroundColor DarkCyan
         Write-Host "|_____|_| |_|\__|_|  \__,_|_|  |_|\__,_|_|_|" -ForegroundColor DarkCyan
         Write-Host "                                            " -ForegroundColor DarkCyan
-        Write-Host "         Find Your UPN in EntraID, Vesrion 1.0" -ForegroundColor DarkCyan
+        Write-Host "         Find Your UPN in EntraID, Vesrion 2.0" -ForegroundColor DarkCyan
         Write-Host "                 By ShkudW" -ForegroundColor DarkCyan
         Write-Host "  https://github.com/ShkudW/EntraMail" -ForegroundColor DarkCyan
         Write-Host "=============================================================" -ForegroundColor DarkCyan
