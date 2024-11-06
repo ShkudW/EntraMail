@@ -21,30 +21,32 @@ Import-Module .\EntraMail.psm1
 ```
 ```powershell
 # Searching by single first name and last name
-  Invoke-EntraMail -FirstName Shaked -LastName Wiessman -DomainName example.com
+  Invoke-EntraMail -FirstName Shaked -LastName Wiessman -DomainName domain.co.il
 ```
 ```powershell
 # Searching by Names-File it is recommended to use -StopOnFirstMatch flag
-  Invoke-EntraMail -NamesFile names.txt -DomainName example.com -StopOnFirstMatch
+  Invoke-EntraMail -NamesFile names.txt -DomainName domain.co.il -StopOnFirstMatch
 ```
 ```powershell
 # Searching by NUserNames File
-  Invoke-EntraMail -UsernameFile usernames.txt -DomainName example.com -OutputFilePath report.html
+  Invoke-EntraMail -UsernameFile usernames.txt -DomainName domain.co.il -OutputFilePath report.html
+```
+
+```powershell
+# Convert NamesFile to UserNames File :
+  Invoke-EntraMail -ConvertNameFile names.txt -Style firstl 
 ```
 
 ### PoC
 
-![image](https://github.com/user-attachments/assets/99e89d7f-a2fb-4c1a-b4d2-6e53dfd64803)
+![image](https://github.com/user-attachments/assets/11e2771c-78c7-46c9-b049-6a1634bbf9c1)
 
+![image](https://github.com/user-attachments/assets/18117c85-3413-4094-bcd0-4726bbf75f8a)
 
-![image](https://github.com/user-attachments/assets/e6daba67-0def-4bac-8b5e-e08a484a3671)
+![image](https://github.com/user-attachments/assets/f0470fb4-e6f5-44fa-b4bb-96a938642633)
 
-![image](https://github.com/user-attachments/assets/fb672549-ae45-462f-b950-29114f6cb06d)
+![image](https://github.com/user-attachments/assets/a7670d0c-4525-476e-8c8c-715231619409)
 
-
-![image](https://github.com/user-attachments/assets/6c7a3307-3ddd-4142-beed-95b918df325f)
-
-
-![image](https://github.com/user-attachments/assets/ea0dda38-9270-4035-bba8-4f6d18b9b389)
+![image](https://github.com/user-attachments/assets/024f808e-9c00-4f8a-9c7f-c03d82b88b60)
 
 
