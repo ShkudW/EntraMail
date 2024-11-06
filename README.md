@@ -43,9 +43,9 @@ Import-Module .\EntraMail.psm1
 
 ![image](https://github.com/user-attachments/assets/18117c85-3413-4094-bcd0-4726bbf75f8a)
 
-![image](https://github.com/user-attachments/assets/f0470fb4-e6f5-44fa-b4bb-96a938642633)
-
 ![image](https://github.com/user-attachments/assets/a7670d0c-4525-476e-8c8c-715231619409)
+
+![image](https://github.com/user-attachments/assets/f0470fb4-e6f5-44fa-b4bb-96a938642633)
 
 ![image](https://github.com/user-attachments/assets/024f808e-9c00-4f8a-9c7f-c03d82b88b60)
 
