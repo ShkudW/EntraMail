@@ -22,7 +22,7 @@ function Invoke-EntraMail {
         [switch]$StopOnFirstMatch,
 
         [string]$ConvertNameFile,
-        [ValidateSet("FirstL", "LastF", "Last.First", "First.Last", 
+        [ValidateSet("First", "Last", "FirstL", "LastF", "Last.First", "First.Last", 
                  "FirstLast", "LastFirst", "FirstInitialLast", "LastInitialFirst", 
                  "InitialFirstLast", "InitialLastFirst", "FirstTwoLast", "LastTwoFirst", 
                  "FirstThreeLast", "LastThreeFirst")]
@@ -115,6 +115,8 @@ function Invoke-EntraMail {
 
 function Generate-Username($firstName, $lastName, $style) {
     switch ($style) {
+    	"First" 	      { return ($firstName) }
+     	"Last" 		      { return ($lastName) }
         "FirstL"              { return ($firstName + $lastName.Substring(0, 1)).ToLower() }
         "LastF"               { return ($lastName + $firstName.Substring(0, 1)).ToLower() }
         "First.Last"          { return ($firstName + "." + $lastName).ToLower() }
@@ -146,7 +148,7 @@ if ($ConvertNameFile -and $style -and -not $DomainName) {
 
   	  $firstName = $splitName[0]
   	  $lastName = $splitName[1]
-    	$username = Generate-Username -firstName $firstName -lastName $lastName -style $Style
+	$username = Generate-Username -firstName $firstName -lastName $lastName -style $Style
    	 Write-Output $username
 	}
 
